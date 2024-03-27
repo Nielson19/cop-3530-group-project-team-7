@@ -37,4 +37,5 @@ To be considered:
 - will there be a user inferface of web, command-line? 
 
 Sketched notes from first meeting: 
+[data Structures Project 2 (1).pdf](https://github.com/Dr-Tamames-FIU/cop-3530-group-project-team-7/files/14775995/data.Structures.Project.2.1.pdf)
 
