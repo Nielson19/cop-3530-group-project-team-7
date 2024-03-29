@@ -6,7 +6,7 @@
  * 
 */
 
-public class MyInventory {
+public class MyInventory implements InterfaceInventory {
     
     protected int aisleNumber; // determine the number of Aisle
     protected int size; // size variable
@@ -28,7 +28,6 @@ public class MyInventory {
         int amount;
 
         // constructor
-
         Product (int location, Object productName, int amount){
 
             this.location = location;
