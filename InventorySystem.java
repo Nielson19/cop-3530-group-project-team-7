@@ -1,4 +1,4 @@
-// Import Hashtable and LinkedList 
+// Import Hashtable and shelfList
 
 
 /* Define parameters 
