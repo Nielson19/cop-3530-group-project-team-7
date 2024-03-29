@@ -1,4 +1,4 @@
-package Shelves;
+package Shelves; // its inside this folder
 
 // this is a reference to the LinkedList
 
