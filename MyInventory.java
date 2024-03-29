@@ -39,7 +39,7 @@ public class MyInventory implements InterfaceInventory {
     }
 
     public Object add(int location, Object productName, int amount){
-        
+
            //Method to add a product to a specified aisle
 
         return null; //If no products is found return null 
@@ -88,12 +88,5 @@ public class MyInventory implements InterfaceInventory {
         return null;
     }
        
-    
-
-
-   
-
-   
-
 
 }
