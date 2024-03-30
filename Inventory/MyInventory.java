@@ -1,10 +1,6 @@
-// Import Hashtable and shelfList
+package Inventory;
+import Inventory.Product;
 
-
-/* Define parameters 
- * 
- * 
-*/
 
 public class MyInventory implements InterfaceInventory { 
     
@@ -18,25 +14,6 @@ public class MyInventory implements InterfaceInventory {
     public int size(){return -1;}// returns the size of the Inventory
 
     public void clear(){} // Empties MyInventory
-
-      // Create a class called Product which stores the key, Object & amount 
-    // this is required since those are the parameters needed to modify the inventory
-    //(add,remove,find, get...)
-
-    public class Product{
-        int location;
-        Object productName;
-        int amount;
-
-        // constructor
-        Product (int location, Object productName, int amount){
-
-            this.location = location;
-            this.productName = productName;
-            this.amount = amount;
-
-        }
-    }
 
     public Object add(int location, Object productName, int amount){
         
@@ -88,12 +65,5 @@ public class MyInventory implements InterfaceInventory {
         return null;
     }
        
-    
-
-
-   
-
-   
-
 
 }

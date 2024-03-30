@@ -1,12 +1,12 @@
 package Shelves; // its inside this folder
+import Shelves.shelfList;
+// this is a reference to the ShelfList
 
-// this is a reference to the LinkedList
+public class shelfList implements shelfListInterface{
 
-public class shelfList {
    protected int size;
    protected Node head;
    protected Node tail;
-
 
     class Node { // product will have 3 parameters, product (ProductName), amount of the product, and the next link
         Object product;
@@ -22,7 +22,6 @@ public class shelfList {
 
         }
 
-
     }
 
     //METHODS FOR THE SHELFS
@@ -36,7 +35,7 @@ public class shelfList {
             // loop through the linkedList to find the index related to the next link
             while (n < i){
                 current = current.next;
-                i++;
+                n++;
             }
             return current.product;     
         }
@@ -73,7 +72,7 @@ public class shelfList {
             return false;
     }
 
-    public void addProduct(int i, Object product){ // adds a product to the shelf
+    public void addProduct(int i, Object product, int amount){ // adds a product to the shelf
         if (i >= 0 && i >= size){
 
             if (i == 0){ // if index is in the beginning
@@ -111,7 +110,7 @@ public class shelfList {
         
     }
 
-    public void removeProduct(int i, Object product){ // removes a product from the shelf
+    public void removeProduct(int i, Object product, int amount){ // removes a product from the shelf
         if (i >= 0 && i >= size){
 
             if (i == 0){ // if index is in the beginning
@@ -124,16 +123,23 @@ public class shelfList {
             else if (i == size - 1) {
                 // Removing the last element of the list
                 Node current = head;
-                for(int n = 0; n < size - 2; i++) {
+                for(int n = 0; n < size - 1; n++) {
                     current = current.next;
                 }
-                tail = current;
-                tail.next = null;
+               
+                tail.amount -= amount;
+
+                if (amount <= 0){ // condition to make sure if the amount is less or equal to 0 it will delete the item
+                    tail = current;
+                    tail.next = null;
+
+                } 
+                
             }
             else {
                 // Removing an element from the middle of the list
                 Node prev = head;
-                for(int n = 1; n < i; i++) {
+                for(int n = 1; n < i; n++) {
                     prev = prev.next;
                 }
                 prev.next = prev.next.next;
@@ -179,4 +185,7 @@ public class shelfList {
 
 
 }
+
+
+
 
