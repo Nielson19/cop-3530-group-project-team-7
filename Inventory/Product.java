@@ -7,14 +7,23 @@ package Inventory;
 public class Product{
     int location;
     Object productName;
-    int amount;
+
+
+    public String getName(){ //get the name of the product
+        return productName.toString();
+        
+    }
+
+    public int getLocation(){
+        return location;
+    }
 
     // constructor
-    public Product(int location, Object productName, int amount){
+    public Product(int location, Object productName){
 
         this.location = location;
         this.productName = productName;
-        this.amount = amount;
+
 
     }
 }

@@ -1,23 +1,24 @@
 package Shelves; // its inside this folder
+import Inventory.Product;
 import Shelves.shelfList;
 // this is a reference to the ShelfList
 
 public class shelfList implements shelfListInterface{
 
    protected int size;
-   protected Node head;
-   protected Node tail;
+   protected ProductNode head;
+   protected ProductNode tail;
 
-    class Node { // product will have 3 parameters, product (ProductName), amount of the product, and the next link
+    class ProductNode { // product will have 3 parameters, product (ProductName), amount of the product, and the next link
         Object product;
         int amount;
-        Node next;
+        ProductNode next;
 
         // constructor
 
-        Node(Object p){ // default template for a element in a linkedList
+        ProductNode(Object p,int a){ // default template for a element in a linkedList
             product = p;
-            amount = 0;
+            amount = a;
             next = null; 
 
         }
@@ -29,7 +30,7 @@ public class shelfList implements shelfListInterface{
     public Object getProduct(int i){ // search for the product 
         
         if(i >= 0 && i < size){ // evaluate if i is in list
-            Node current = head;
+            ProductNode current = head;
             int n = 0;
             
             // loop through the linkedList to find the index related to the next link
@@ -50,9 +51,9 @@ public class shelfList implements shelfListInterface{
     public String stringReport(){ // prints the report fo the linkedList
 
         String r = "Report:\n";
-        Node current = head;
+        ProductNode current = head;
         while (current != null) {
-            r = r + current.product + "\t" + current.amount + " Units";
+            r = r + ((Product)current.product).getName() + "\t" + current.amount + " Units";
             if (current.next != null)
                 r = r + "\n";
             current = current.next;
@@ -75,17 +76,18 @@ public class shelfList implements shelfListInterface{
     public void addProduct(int i, Object product, int amount){ // adds a product to the shelf
         if (i >= 0 && i >= size){
 
+            
             if (i == 0){ // if index is in the beginning
-                Node newNode = new Node(product); // initialize the new product()
+                ProductNode newNode = new ProductNode(product, amount); // initialize the new product()
                 newNode.next = head; //adds the next value of the new node as the head (top of the list)
-                newNode = head; // TODO understand this...
+                head = newNode; // TODO understand this...
 
                 if (tail == null){
                     tail = newNode;
                 }
             }
             else if (i == size) { // if index is in the end
-                Node newNode = new Node(product); // initialize the new product()
+                ProductNode newNode = new ProductNode(product, amount); // initialize the new product()
                 newNode.next = head; //adds the next value of the new node as the head (top of the list)
                 newNode = head; // TODO understand this...
 
@@ -94,13 +96,13 @@ public class shelfList implements shelfListInterface{
             else { // if it is in the middle of the list
 
                 int n = 0;
-                Node current = head;
+                ProductNode current = head;
                 while (n < i - 1){
                     current = current.next;
                     i++;
                 }
                 
-                Node newNode = new Node(product);
+                ProductNode newNode = new ProductNode(product, amount);
                 newNode.next = current.next;
                 current.next = newNode; // TODO understand this...
                 
@@ -122,7 +124,7 @@ public class shelfList implements shelfListInterface{
             }
             else if (i == size - 1) {
                 // Removing the last element of the list
-                Node current = head;
+                ProductNode current = head;
                 for(int n = 0; n < size - 1; n++) {
                     current = current.next;
                 }
@@ -138,7 +140,7 @@ public class shelfList implements shelfListInterface{
             }
             else {
                 // Removing an element from the middle of the list
-                Node prev = head;
+                ProductNode prev = head;
                 for(int n = 1; n < i; n++) {
                     prev = prev.next;
                 }
@@ -152,7 +154,7 @@ public class shelfList implements shelfListInterface{
     }
 
     public int findProduct(Object product){ //finds the product 
-        Node current = head;
+        ProductNode current = head;
         int i = -1;
 
         while(current != null){
