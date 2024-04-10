@@ -2,7 +2,7 @@ package Shelves;
 
 public interface shelfListInterface {
 
-    public Object getProduct(int i);
+    public void addProduct(int i, String name, int amount);
 
     public String stringReport();
 
@@ -10,11 +10,7 @@ public interface shelfListInterface {
 
     public boolean isEmpty();
 
-    public void addProduct(int i, Object product, int amount);
-
-    public void removeProduct(int i, Object product, int amount);
-
-    public int findProduct(Object product);
+    public void removeProduct(int i);
 
     public void removeAll();
 

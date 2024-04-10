@@ -1,9 +1,7 @@
 package Shelves;
 import Shelves.shelfListInterface;
 import Shelves.shelfList;
-import Shelves.shelfList.ProductNode;
-
-import Inventory.Product;
+import Shelves.ProductNode;
 
 public class shelfListTest {
 
@@ -16,28 +14,30 @@ public class shelfListTest {
         // Create a shelfList object
         shelfList myShelf = new shelfList();
 
-        // Create a product
-        Product myProduct = new Product(7, "Milk");
          // Add the product to the shelf
-         myShelf.addProduct(0, myProduct, 20); // add the name of the product
 
-        myProduct = new Product(18, "Juice");
-        // Add the product to the shelf
-        myShelf.addProduct(1, myProduct, 30); // add the name of the product
-
-        myProduct = new Product(20, "Bread");
-        // Add the product to the shelf
-        myShelf.addProduct(2, myProduct, 40); // add the name of the product
-
-
-
-
-       
+        myShelf.addProduct(0,"Milk",20); // location,name,amount
+        myShelf.addProduct(1,"Juice",10);
+        myShelf.addProduct(2,"Bread",40);
+        myShelf.addProduct(3,"Cheese",80);
         
-
-        // You can perform further tests here, like checking if the product was added correctly
+         // You can perform further tests here, like checking if the product was added correctly
         // For example:
         System.out.println(myShelf.stringReport()); // Print the report to see if the product is added correctly
+        System.out.println("---------------------------------------------------");
+
+        myShelf.removeProduct(1); //remove product on index 1 + remove by amount if reach 0 its deleted
+
+        System.out.println(myShelf.stringReport()); // Print the report to see if the product deleted correctly
+        System.out.println("---------------------------------------------------");
+
+        myShelf.removeAll(); // delete all 
+
+        System.out.println(myShelf.stringReport()); // Print the report to see if the list is fully deleted
+        System.out.println("---------------------------------------------------");
+
+
+
     }
 }
 
