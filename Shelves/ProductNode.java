@@ -6,6 +6,16 @@ public class ProductNode {
     String name;
     ProductNode next;
 
+    //methods
+
+    public int getAmount(){
+        return amount;
+    }
+
+    public String getName(){
+        return name;
+    }
+
     // constructor
 
     ProductNode(int amount , String name){

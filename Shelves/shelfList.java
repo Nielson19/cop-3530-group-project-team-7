@@ -104,7 +104,7 @@ public class shelfList implements shelfListInterface{
                 // iteration
                 ProductNode prev = head; // starting point
 
-                for (int n = 0; n <= i; n++){
+                for (int n = 2; n <= i; n++){
                     prev = prev.next;
                 }
 
@@ -144,6 +144,27 @@ public class shelfList implements shelfListInterface{
         }
     }
 
+    public Object findProduct(String name){
+        ProductNode current = head;
+
+        while (current.name != name || current != null){
+            if (current.name == name){
+                return current;
+            }
+
+            current = current.next;
+
+            if (current == null){
+                System.out.println("Product not Found");
+                return current;
+            }
+        }
+
+        return current;
+
+       
+    }
+    
     public void removeAll() { // empty list
         size = 0;
         head = null;
