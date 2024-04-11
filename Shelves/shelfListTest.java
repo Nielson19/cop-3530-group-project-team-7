@@ -26,21 +26,25 @@ public class shelfListTest {
         System.out.println(myShelf.stringReport()); // Print the report to see if the product is added correctly
         System.out.println("---------------------------------------------------");
 
-        myShelf.removeProduct(2); //remove product on index 1 + remove by amount if reach 0 its deleted (Works)
+        myShelf.addProduct(2,"Milk",40);
+
+        // myShelf.removeProduct(0, 10); //remove product on index 1 + remove by amount if reach 0 its deleted (Works)
 
         System.out.println(myShelf.stringReport()); // Print the report to see if the product deleted correctly
         System.out.println("---------------------------------------------------");
 
         // myShelf.removeAll(); // delete all (works)
 
-        System.out.println(myShelf.stringReport()); // Print the report to see if the list is fully deleted
-        System.out.println("---------------------------------------------------");
+        // System.out.println(myShelf.stringReport()); // Print the report to see if the list is fully deleted
+        // System.out.println("---------------------------------------------------");
 
-        ProductNode foundProduct = (ProductNode)myShelf.findProduct("Cheese");
-        ProductNode foundProduct2 = (ProductNode)myShelf.findProduct("Cheese");
-        ProductNode foundProduct3 = (ProductNode)myShelf.findProduct("Cheese");
+        System.out.println(myShelf.findProduct("Ice Cream"));
+        myShelf.findProduct("Milk");
+        myShelf.findProduct("Bread");
+
+
         
-
+        
      
 
 

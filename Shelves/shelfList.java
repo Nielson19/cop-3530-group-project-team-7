@@ -1,7 +1,6 @@
 package Shelves; // its inside this folder
 import java.beans.PropertyDescriptor;
 import java.util.LinkedList;
-import Inventory.Product;
 import Shelves.shelfList;
 import Shelves.ProductNode;
 // this is a reference to the ShelfList
@@ -18,64 +17,115 @@ public class shelfList implements shelfListInterface{
 
         //verify if i is on list
 
-        if (location >= 0 && location <= size){
+        if (location >= 0 && location <= size){ //           -1 ?
 
             // if index is at the beginning
 
             if(location == 0){
 
-                ProductNode newProduct = new ProductNode(amount, name);//create the product
-                newProduct.next  = head; // current head behind newNode
-                head = newProduct; // head becomes NewNode
-                
-                // condition if only one element is in list
-                if (tail == null){
-                    tail = newProduct; // tail also becomes the newProduct since it taking place of both
-                }
+                //check if product exist
+
+                if(findProduct(name) == null){ // if do not exist TODO problems asimilating null in this part
+
+                    ProductNode newProduct = new ProductNode(amount, name);//create the product
+                    newProduct.next  = head; // current head behind newNode
+                    head = newProduct; // head becomes NewNode
+                    
+                    // condition if only one element is in list
+                    if (tail == null){
+                        tail = newProduct; // tail also becomes the newProduct since it taking place of both
+                    }
+
+                } else { // if it does exist
+
+                ProductNode foundProduct = (ProductNode)findProduct(name);
+                foundProduct.amount = foundProduct.amount + amount;
+            }
+
+               
 
             }
 
             // if index is at the end of the list
 
-            else if(location == size){
+            else if(location == size){ // - 1 ?
+
+                // condition if item exist
+
+                if(findProduct(name) == null){ // if do not exist
 
                 ProductNode newProduct = new ProductNode(amount, name);//create the product
                 tail.next = newProduct; // next of current tail carries NewNode
                 tail = newProduct; // newNode becomes the new Tail
+
+                    
+                } else { // if it does exist
+
+                    ProductNode foundProduct = (ProductNode)findProduct(name);
+                    foundProduct.amount = foundProduct.amount + amount;
+                }
 
             }
 
             // if index is in the middle of the list
 
             else {
-                int n = 0;
-                ProductNode current = head; //starting 
-                while (n < location - 1){ // iteration 
-                    current = current.next; 
-                    n++;
-                }
 
-                ProductNode newProduct = new ProductNode(amount, name);//create the product
-                newProduct.next = current.next; 
-                current.next = newProduct; // opening the space for the new product
+                 // condition if item exist
+
+                if(findProduct(name) == null){ // if do not exist
+
+                    int n = 0;
+                    ProductNode current = head; //starting 
+                    while (n < location - 1){ // iteration 
+                        current = current.next; 
+                        n++;
+                    }
+
+                    ProductNode newProduct = new ProductNode(amount, name);//create the product
+                    newProduct.next = current.next; 
+                    current.next = newProduct; // opening the space for the new product
+
+                 
+                } else { // if it does exist
+
+                    ProductNode foundProduct = (ProductNode)findProduct(name);
+                    foundProduct.amount = foundProduct.amount + amount;
+                }
             }
             size++;
         }
     }
 
-    public void removeProduct(int i){
+    public void removeProduct(int i, int amount){
 
         if (i >= 0 && i <= size){
 
             // if index is at the beginning
 
             if(i == 0){
+                
+                // apply amount change
 
-                head = head.next; // current head is replaced for head.next
-                if (head == null){ // the replacement is null
-                    tail = null; 
+                head.amount = head.amount - amount;
+                
+                // condition amount is 0 delete
+
+                if (head.amount <= 0) {
+
+                        head = head.next; // current head is replaced for head.next
+
+                    if (head == null){ // the replacement is null
+                        tail = null; 
+                    }
+                    size--;
+
+                } else{
+                    System.out.println("- " + head.name + " has now " + head.amount + "Units");
                 }
 
+                
+                
             }
 
             // if index is at the end of the list
@@ -90,10 +140,24 @@ public class shelfList implements shelfListInterface{
                     n++;
                 }
                 
-                // the current which is 1 ahead of tail becomes the new tail with the correspoding next
+                //apply change of amount
 
-                tail = current; 
-                tail.next = null;
+                current.next.amount = current.next.amount - amount;
+                
+                // condition of amount is 0
+
+                if (current.next.amount <= 0) {
+
+                    // the current which is 1 ahead of tail becomes the new tail with the correspoding next
+
+                    tail = current; 
+                    tail.next = null;
+                    size--;
+
+                } else{
+
+                    System.out.println("- " + current.name + " has now " + current.amount + "Units");
+                }
 
             }
 
@@ -104,17 +168,31 @@ public class shelfList implements shelfListInterface{
                 // iteration
                 ProductNode prev = head; // starting point
 
-                for (int n = 2; n <= i; n++){
+                for (int n = 1; n < i; n++){
                     prev = prev.next;
                 }
 
-                prev.next = prev.next.next; // jumps over the actual object replacing the previous next to the current next eating the product
+                 //apply change of amount
+
+                 prev.next.amount = prev.next.amount - amount;
+                
+                 // condition of amount is 0
+ 
+                 if (prev.next.amount <= 0) {
+ 
+                    prev.next = prev.next.next; // jumps over the actual object replacing the previous next to the current next eating the product
+                    size--;
 
                 }
+                else{
 
-            size--;
+                    System.out.println("- " + prev.name + " has now " + prev.amount + "Units");
+                }
 
             }
+           
+        }
+          
     }
     
     public String stringReport(){
@@ -139,31 +217,28 @@ public class shelfList implements shelfListInterface{
 
         if (size == 0){
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
     public Object findProduct(String name){
+
         ProductNode current = head;
 
-        while (current.name != name || current != null){
-            if (current.name == name){
+        while (current != null) {
+            if (current.name.equals(name)) {
+                System.out.println("Product " + current.name + " was found");
                 return current;
             }
 
             current = current.next;
-
-            if (current == null){
-                System.out.println("Product not Found");
-                return current;
-            }
         }
 
-        return current;
-
-       
-    }
+        System.out.println("Product " + name + " not Found");
+        return null;
+    
+        }
     
     public void removeAll() { // empty list
         size = 0;
@@ -172,6 +247,12 @@ public class shelfList implements shelfListInterface{
 
     }
 
+    public void move(int location, int target){
+
+
+
+    } // would change location on shelf
+    
     //constructor
 
     shelfList(){
@@ -181,6 +262,11 @@ public class shelfList implements shelfListInterface{
     }
 
 }
+
+// TODO Implement some testing for the amount change on remove
+
+
+
 
 
 

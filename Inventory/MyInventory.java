@@ -1,6 +1,8 @@
 package Inventory;
 import Inventory.Product;
 
+//we can use the remainder as the idle position and the result of the division is the position
+
 
 public class MyInventory implements InterfaceInventory { 
     
