@@ -1,10 +1,19 @@
 package Inventory;
+
 public interface InterfaceInventory {
-
-    public Object add(int location, Object productName, int amount);
     
-
-
-
+    boolean isEmpty();
+        
+    int size ();
+            
+    void clear ();
+        
+    Object add (int aisleNumber, Object productName, int amount);
+        
+    // Object remove (int aisleNumber, Object productName, int amount);
+        
+    Object find (Object productName);
+        
+    // String[] getReport();
 
 }

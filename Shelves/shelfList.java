@@ -7,9 +7,9 @@ import Shelves.ProductNode;
 
 public class shelfList implements shelfListInterface{
 
-    protected int size;
-    protected ProductNode head; // first element of the list
-    protected ProductNode tail; // last element of the list
+    public int size;
+    public ProductNode head; // first element of the list
+    public ProductNode tail; // last element of the list
 
     // methods
 
@@ -249,7 +249,7 @@ public class shelfList implements shelfListInterface{
     
     //constructor
 
-    shelfList(){
+    public shelfList(){
         size = 0;
         head = null;
         tail = null;

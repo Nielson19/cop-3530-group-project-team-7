@@ -2,9 +2,9 @@ package Shelves;
 
 public class ProductNode {
     // Object product;
-    int amount;
-    String name;
-    ProductNode next;
+    public int amount;
+    public String name;
+    public ProductNode next;
 
     //methods
 
@@ -18,7 +18,7 @@ public class ProductNode {
 
     // constructor
 
-    ProductNode(int amount , String name){
+    public ProductNode(int amount , String name){
 
         this.amount = amount;
         this.name = name;

@@ -1,62 +1,194 @@
 package Inventory;
-import Inventory.Product;
 
-//we can use the remainder as the idle position and the result of the division is the position
+import Shelves.ProductNode;
+import Shelves.shelfList;
 
+/**
+ * MyInventory class represents an inventory management system using a Hashtable
+ * to store shelves, where each shelf contains a list of products.
+ */
 
-public class MyInventory implements InterfaceInventory { 
+ public class MyInventory implements InterfaceInventory 
+ {
+
+    // Hashtable to store aisles, where each aisle maps to a shelfList of Product objects 
+    public int aisleNumber;
+    public int size;
+    public shelfList[] table;
+
+    public MyInventory(int aisleNumber) 
+    {
+        this.table = new shelfList[aisleNumber];
+        this.aisleNumber = aisleNumber;
+        this.size = 0;
+    }
+
+    // Methods
+
+    // Checks if the inventory is empty.
+    public boolean isEmpty()
+    {
+        return size == 0; // return true if the inventory is empty, false otherwise.
+    }
+
+  // Returns the size of the inventory
+    public int size()
+    {
+        return size; //returns the number of aisles in the inventory
+    }
+
+    /**
+     * Adds a product to a specified aisle.
+     * @param aisleNumber The aisle number where the product will be added.
+     * @param productName The name of the product to be added.
+     * @param amount The quantity of the product to be added.
+     * @return The added product, or null if the aisle doesn't exist.
+     */
+    public Object add (int aisleNumber, Object productName, int amount)
+    {
+        // Calculate index based on the aisleNumber
+        int index = Math.abs(aisleNumber) % table.length;
+
+        // Check if the shelfList at the index is null
+        if (table[index] == null) 
+        {
+            table[index] = new shelfList(); //if it's null create new shelfList
+        }
+
+        // Retrieve the shelfList at the index
+        shelfList list = table[index];
+
+        // Search for the product in the  shelfList
+        for (int i = 0; i < list.size(); i++)
+        {
+            ProductNode node = (ProductNode) list.findProduct((String) productName);
+            if (node != null && node.name.equals(productName)) 
+            {
+                node.amount += amount; //If the product exists, update amount
+                return node;
+            }
+        }
+
+        // If the product does not exist, create it 
+        ProductNode newProduct = new ProductNode(amount, (String) productName);
+        
+        // Add the new ProductNode to the shelfList
+        list.addProduct(list.size(), (String) productName, amount);
+        size++; // Increment the size
+        return newProduct; // Return newly added product
+    }
     
-    protected int aisleNumber; // determine the number of Aisle
-    protected int size; // size variable
 
-    //Create a Hashtable to store aisles, where each aisle maps to a shelfList of Product Objects
+    /**
+     * Removes a specified amount of a product from a specified aisle.
+     * @param aisleNumber The aisle number from where the product will be removed.
+     * @param productName The name of the product to be removed.
+     * @param amount The quantity of the product to be removed.
+     * @return The removed product, or null if the aisle doesn't exist.
+     */
+    // TO DO
+    // public Object remove (int aisleNumber, int i, int amount)
+    // {
+    //     // Calculate index based on the aisleNumber
+    //     int index = Math.abs(aisleNumber) % table.length;
 
-    public boolean isEmpty() {return true;}//checks if inventory is empty
-
-    public int size(){return -1;}// returns the size of the Inventory
-
-    public void clear(){} // Empties MyInventory
-
-    public Object add(int location, Object productName, int amount){
+    //      // Check if the shelfList at the index is null
+    //      if (table[index] == null) 
+    //     {
+    //         return null;
+    //     }
         
-           //Method to add a product to a specified aisle
+    //     // Retrieve the shelfList at the index
+    //     shelfList list = table[index];
 
-        return null; //If no products is found return null 
-    }
-
-
-    public Object remove(int location, int amount){
-
-        // if statement where once it reaches 0 the item should be out of the ShelfList
-
-        return null;
-    }
-
-
-    public Object find(Object productName){
-
-
-         //Method to find a product by its scanning number within a specified aisle 
-
-          //Retrieve the list of products for the given aisle name 
-
-                // if the aisle does not exist it would be null
+    //     // Find the index of the product in the shelfList
+    //     ProductNode product = list.findProduct(productName);
+    //     if (product != null) 
+    //         {
+    //             product.amount -= amount;
         
-                //Iterate through products in the aisle
+    //     // If the amount becomes 0 or less, remove the product from the list
+    //     if (product.amount <= 0) 
+    //     {
+    //         list.removeProduct(productName); // Assuming removeProduct removes by name       
+    //     }
+    //     // If the list becomes empty after removal, set it to null
+    //     if (list.size() == 0) {
+    //         table[index] = null;
+    //     }
+        
+    //     // Decrease the size of the inventory
+    //       size--;
+    //       return product; // Return the removed product
+    //     }
 
-                //Check if the current product's scanning number matches the one we're searching
+    //     return null; //Return null if the product doesn't exist in the aisle
+    
+    // }
 
-                //return the product if match is found
-           
-            //Create a new ShelfList for a new aisle, or get the existing list, and then add the product to it 
 
-        return null;
+
+    /**
+     * Finds a product by its name within the inventory.
+     * @param productName The name of the product to be found.
+     * @return The found product, or null if not found.
+     */
+    public Object find (Object productName)
+    {
+     // Iterate through shelfLists in the inventory
+    for (int i = 0; i < aisleNumber; i++) 
+        {
+        // Check if the shelfList at the index is not null
+        if (table[i] != null) 
+            {
+            // Retrieve the shelfList at the index
+            shelfList list = table[i];
+            // Find the product in the current shelfList
+            ProductNode product = (ProductNode) list.findProduct((String) productName);
+            if (product != null && product.name.equals(productName)) 
+                {
+                    System.out.println("Product " + productName + " was found");
+                    return product; // Return the found product
+                }
+            }
+        }
+    // If the product is not found
+    System.out.println("Product " + productName + " not found");
+    return null;
     }
 
+     
+    
+    // Empties the inventory by removing all aisles
+    public void clear() 
+    {
+        // Empty the hashtable
+        table = new shelfList[aisleNumber];
+        // Reset size to 0
+        size = 0;
+    }
 
-    public String[] getReport(){
+    /**
+     * Generates a report of all products in the inventory.
+     * @return An array of strings representing the report.
+     */
+    
+    // BIELKY TO DO
+    // public String[] getReport()
+    // {
+        // Create a String[] with a size equal to the number of unique productNames in the hashtable
+        // String[] productNames = new String(size);
+        // int count = 0;
+        // Iterate through the hashtable array
+        // for (int i = 0; i < table.length; i++) {
+            // For each table location that isn't null
+                // a. Iterate though the bucket (linked list)
+                // getting the productName out of each Entry and storing it in
+                // the array of strings you created in step 1.
+                // Return the String[]
 
-        //Print the report of all the items it should be the name location and current amount
+
+    //Print the report of all the items it should be the name, location and current amount
 
         // Condition where if (product.amount is <= 2) write a status column of "low" else leave status "normal"
 
@@ -64,8 +196,27 @@ public class MyInventory implements InterfaceInventory {
 
         // Print acordingly make it PRETTYYYYY!!!!!!!
 
-        return null;
-    }
-       
 
-}
+
+    // }
+
+ }
+
+    
+//PREVIOUS NOTES: we can use the remainder as the idle position and the result of the division is the position
+//      protected int aisleNumber; // determine the number of Aisle
+//      protected int size; // size variable
+  
+//     public boolean isEmpty() {return true;}
+
+//     public int size(){return -1;}
+    
+//     public void clear(){} 
+
+//     public Object add(int aisleNumber, Object productName, int amount){
+
+//     public Object remove(int aisleNumber, Object productName, int amount){
+
+//     public Object find(Object productName)
+
+//    public String[] getReport()
