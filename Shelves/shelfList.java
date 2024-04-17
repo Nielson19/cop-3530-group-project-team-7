@@ -97,13 +97,13 @@ public class shelfList implements shelfListInterface{
         }
     }
 
-    public void removeProduct(int i, int amount){
+    public void removeProduct(int location, String name ,int amount){
 
-        if (i >= 0 && i <= size){
+        if (location >= 0 && location <= size){
 
             // if index is at the beginning
 
-            if(i == 0){
+            if(location == 0){
                 
                 // apply amount change
 
@@ -123,42 +123,48 @@ public class shelfList implements shelfListInterface{
                 } else{
                     System.out.println("- " + head.name + " has now " + head.amount + "Units");
                 }
-
-                
-                
+       
             }
 
             // if index is at the end of the list
 
-            else if(i == size - 1){
-                ProductNode current = head;
+            else if(location == size){ // TODO check why those -1's are present
                 
                 // iteration through the list
-                int n = 0;
-                while (n < i - 2){ // - 2 since index is always - 1 from size and the other - 1 is aiming to the 1 ahead of tail
-                    current = current.next;
-                    n++;
-                }
+                // while (current.getName() != name){ // - 2 since index is always - 1 from size and the other - 1 is aiming to the 1 ahead of tail
+                //     current = current.next;
+                // }
+
+                // create a variable with the result of a find
+
+                ProductNode current = (ProductNode)findProduct(name);
+
+                if (current != null){  // if product found 
+
+                    //apply change of amount
+
+                    current.next.amount = current.next.amount - amount;
+
+                           // condition of amount is 0
+
+                    if (current.next.amount <= 0) { // if amount runs out 
+
+                        tail = current; 
+                        tail.next = null;
+                        size--;
+
+                    } else{ // if amount still available
+
+                        System.out.println("- " + current.name + " has now " + current.amount + "Units");
+                    }
+
+
+                } else if (current == null){ // if product not found
+
+                    System.out.println("Product: " + name + "not changed. Product not Found");
+                    // ends...
+                };
                 
-                //apply change of amount
-
-                current.next.amount = current.next.amount - amount;
-                
-                // condition of amount is 0
-
-                if (current.next.amount <= 0) {
-
-                    // the current which is 1 ahead of tail becomes the new tail with the correspoding next
-
-                    tail = current; 
-                    tail.next = null;
-                    size--;
-
-                } else{
-
-                    System.out.println("- " + current.name + " has now " + current.amount + "Units");
-                }
-
             }
 
             // if index is in the middle of the list
@@ -166,28 +172,31 @@ public class shelfList implements shelfListInterface{
             else {
 
                 // iteration
-                ProductNode prev = head; // starting point
+                ProductNode prev = (ProductNode)findProduct(name); // starting point
 
-                for (int n = 1; n < i; n++){
-                    prev = prev.next;
+                if (prev != null){
+
+                        //apply change of amount
+
+                    prev.amount = prev.amount - amount;
+                    
+                    // condition of amount is 0
+    
+                    if (prev.next.amount <= 0) {
+    
+                        prev.next = prev.next.next; // jumps over the actual object replacing the previous next to the current next eating the product
+                        size--;
+
+                    }
+                    else{
+
+                        System.out.println("- " + prev.name + " has now " + prev.amount + " Units");
+                    }
+                } else if (prev == null){
+
+                    System.out.println("Product: " + name + "not changed. Product found");
                 }
-
-                 //apply change of amount
-
-                 prev.next.amount = prev.next.amount - amount;
                 
-                 // condition of amount is 0
- 
-                 if (prev.next.amount <= 0) {
- 
-                    prev.next = prev.next.next; // jumps over the actual object replacing the previous next to the current next eating the product
-                    size--;
-
-                }
-                else{
-
-                    System.out.println("- " + prev.name + " has now " + prev.amount + "Units");
-                }
 
             }
            
@@ -235,7 +244,7 @@ public class shelfList implements shelfListInterface{
             current = current.next;
         }
 
-        System.out.println("Product " + name + " not Found");
+        // System.out.println("Product " + name + " not Found");
         return null;
     
         }
@@ -246,12 +255,6 @@ public class shelfList implements shelfListInterface{
         tail = null;
 
     }
-
-    public void move(int location, int target){
-
-
-
-    } // would change location on shelf
     
     //constructor
 
@@ -263,7 +266,7 @@ public class shelfList implements shelfListInterface{
 
 }
 
-// TODO Implement some testing for the amount change on remove
+
 
 
 

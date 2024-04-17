@@ -10,12 +10,12 @@ public interface shelfListInterface {
 
     public boolean isEmpty();
 
-    public void removeProduct(int location, int amount);
+    public void removeProduct(int location, String name, int amount);
 
     public Object findProduct(String name);
 
     public void removeAll();
 
-    public void move(int location, int target);
+
 
 }
