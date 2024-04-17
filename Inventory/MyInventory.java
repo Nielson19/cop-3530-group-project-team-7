@@ -86,48 +86,30 @@ import Shelves.shelfList;
      * @param amount The quantity of the product to be removed.
      * @return The removed product, or null if the aisle doesn't exist.
      */
-    // TO DO
-    // public Object remove (int aisleNumber, int i, int amount)
-    // {
-    //     // Calculate index based on the aisleNumber
-    //     int index = Math.abs(aisleNumber) % table.length;
+    public Object remove(int aisleNumber, String productName, int amount) 
+    {
+         // Calculate index based on the aisleNumber
+        int index = Math.abs(aisleNumber) % table.length;
 
-    //      // Check if the shelfList at the index is null
-    //      if (table[index] == null) 
-    //     {
-    //         return null;
-    //     }
-        
-    //     // Retrieve the shelfList at the index
-    //     shelfList list = table[index];
+        // Check if the shelfList at the index is null
+        if (table[index] == null) {
+            return null; // Return null if the aisle doesn't exist
+        }
 
-    //     // Find the index of the product in the shelfList
-    //     ProductNode product = list.findProduct(productName);
-    //     if (product != null) 
-    //         {
-    //             product.amount -= amount;
-        
-    //     // If the amount becomes 0 or less, remove the product from the list
-    //     if (product.amount <= 0) 
-    //     {
-    //         list.removeProduct(productName); // Assuming removeProduct removes by name       
-    //     }
-    //     // If the list becomes empty after removal, set it to null
-    //     if (list.size() == 0) {
-    //         table[index] = null;
-    //     }
-        
-    //     // Decrease the size of the inventory
-    //       size--;
-    //       return product; // Return the removed product
-    //     }
+        // Retrieve the shelfList at the index
+        shelfList list = table[index];
 
-    //     return null; //Return null if the product doesn't exist in the aisle
+        // Remove the specified amount of the product from the shelfList
+        list.removeProduct(productName, amount);
+
+        // Update the size of the inventory
+        size--;
+
+        // Return the removed product
+        return productName;
+    }
     
-    // }
-
-
-
+    
     /**
      * Finds a product by its name within the inventory.
      * @param productName The name of the product to be found.
