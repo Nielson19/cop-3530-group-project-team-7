@@ -25,7 +25,7 @@ public class shelfList implements shelfListInterface{
 
                 //check if product exist
 
-                if(findProduct(name) == null){ // if do not exist TODO problems asimilating null in this part
+                if(findProduct(name) == null){ // if do not exist
 
                     ProductNode newProduct = new ProductNode(amount, name);//create the product
                     newProduct.next  = head; // current head behind newNode
@@ -97,13 +97,13 @@ public class shelfList implements shelfListInterface{
         }
     }
 
-    public void removeProduct(int location, String name ,int amount){
+    public void removeProduct(String name ,int amount){
 
-        if (location >= 0 && location <= size){
+        ProductNode current = (ProductNode)findProduct(name);
 
             // if index is at the beginning
 
-            if(location == 0){
+            if(current.getName() == head.getName()){
                 
                 // apply amount change
 
@@ -121,33 +121,25 @@ public class shelfList implements shelfListInterface{
                     size--;
 
                 } else{
-                    System.out.println("- " + head.name + " has now " + head.amount + "Units");
+
+                    System.out.println("- " + head.name + " has now " + head.amount + " Units");
                 }
        
             }
 
             // if index is at the end of the list
 
-            else if(location == size){ // TODO check why those -1's are present
-                
-                // iteration through the list
-                // while (current.getName() != name){ // - 2 since index is always - 1 from size and the other - 1 is aiming to the 1 ahead of tail
-                //     current = current.next;
-                // }
-
+            else if(current.getName() == tail.getName()){ 
+            
                 // create a variable with the result of a find
-
-                ProductNode current = (ProductNode)findProduct(name);
-
-                if (current != null){  // if product found 
 
                     //apply change of amount
 
-                    current.next.amount = current.next.amount - amount;
+                    current.amount = current.amount - amount;
 
                            // condition of amount is 0
 
-                    if (current.next.amount <= 0) { // if amount runs out 
+                    if (current.amount <= 0) { // if amount runs out 
 
                         tail = current; 
                         tail.next = null;
@@ -157,18 +149,19 @@ public class shelfList implements shelfListInterface{
 
                         System.out.println("- " + current.name + " has now " + current.amount + "Units");
                     }
-
-
-                } else if (current == null){ // if product not found
-
-                    System.out.println("Product: " + name + "not changed. Product not Found");
-                    // ends...
-                };
                 
+            } 
+
+            // when the produxt is not found 
+
+            else if (current == null){
+
+                System.out.println("We couldnt find " + current.getName() + ". No changes applied");
+
             }
 
             // if index is in the middle of the list
-
+            
             else {
 
                 // iteration
@@ -201,12 +194,10 @@ public class shelfList implements shelfListInterface{
             }
            
         }
-          
-    }
-    
-    public String stringReport(){
+             
+    public String stringReport(){ //TODO the first line of the report is not using the \t on the string 
         String report = "Shelf List\n";
-        ProductNode current = head; // starting point 
+        ProductNode current = head; // starting point  
         while (current != null){ //while it current is a product 
             report = report + " - " + current.name + "\t" + current.amount + " Units.";
             if(current.next != null){ // while there is a product next to the current
@@ -237,7 +228,7 @@ public class shelfList implements shelfListInterface{
 
         while (current != null) {
             if (current.name.equals(name)) {
-                System.out.println("Product " + current.name + " was found");
+                // System.out.println("Product " + current.name + " was found");
                 return current;
             }
 
