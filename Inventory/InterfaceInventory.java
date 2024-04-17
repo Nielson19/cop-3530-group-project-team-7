@@ -10,7 +10,7 @@ public interface InterfaceInventory {
         
     Object add (int aisleNumber, Object productName, int amount);
         
-    // Object remove (int aisleNumber, Object productName, int amount);
+    Object remove (int aisleNumber, Object productName, int amount);
         
     Object find (Object productName);
         
