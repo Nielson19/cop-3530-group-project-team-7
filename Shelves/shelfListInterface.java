@@ -2,7 +2,7 @@ package Shelves;
 
 public interface shelfListInterface {
 
-    public void addProduct(int location, String name, int amount);
+    public void addProduct(int location, int id, String name, int amount);
 
     public String stringReport();
 

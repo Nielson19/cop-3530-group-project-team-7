@@ -1,8 +1,6 @@
 package Shelves; // its inside this folder
-import java.beans.PropertyDescriptor;
-import java.util.LinkedList;
 import Shelves.shelfList;
-import Shelves.ProductNode;
+
 // this is a reference to the ShelfList
 
 public class shelfList implements shelfListInterface{
@@ -13,7 +11,7 @@ public class shelfList implements shelfListInterface{
 
     // methods
 
-    public void addProduct(int location, String name, int amount){
+    public void addProduct(int location, int id, String name, int amount){
 
         //verify if i is on list
 
@@ -27,7 +25,7 @@ public class shelfList implements shelfListInterface{
 
                 if(findProduct(name) == null){ // if do not exist
 
-                    ProductNode newProduct = new ProductNode(amount, name);//create the product
+                    ProductNode newProduct = new ProductNode(id, amount, name);//create the product
                     newProduct.next  = head; // current head behind newNode
                     head = newProduct; // head becomes NewNode
                     
@@ -54,7 +52,7 @@ public class shelfList implements shelfListInterface{
 
                 if(findProduct(name) == null){ // if do not exist
 
-                ProductNode newProduct = new ProductNode(amount, name);//create the product
+                ProductNode newProduct = new ProductNode(id, amount, name);//create the product
                 tail.next = newProduct; // next of current tail carries NewNode
                 tail = newProduct; // newNode becomes the new Tail
 
@@ -82,7 +80,7 @@ public class shelfList implements shelfListInterface{
                         n++;
                     }
 
-                    ProductNode newProduct = new ProductNode(amount, name);//create the product
+                    ProductNode newProduct = new ProductNode(id, amount, name);//create the product
                     newProduct.next = current.next; 
                     current.next = newProduct; // opening the space for the new product
 
@@ -151,14 +149,6 @@ public class shelfList implements shelfListInterface{
                     }
                 
             } 
-
-            // when the produxt is not found 
-
-            else if (current == null){
-
-                System.out.println("We couldnt find " + current.getName() + ". No changes applied");
-
-            }
 
             // if index is in the middle of the list
             
