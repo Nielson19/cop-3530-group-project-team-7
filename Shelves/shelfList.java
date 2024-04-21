@@ -1,6 +1,5 @@
 package Shelves; // its inside this folder
 
-
 import Shelves.shelfList;
 
 // this is a reference to the LinkedList
