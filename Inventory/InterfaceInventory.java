@@ -14,6 +14,6 @@ public interface InterfaceInventory {
         
     Object find (Object productName);
         
-    // String[] getReport();
+    //String[] getReport();
 
 }
