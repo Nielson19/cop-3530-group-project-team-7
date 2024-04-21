@@ -3,6 +3,7 @@ package Shelves;
 public class ProductNode {
     // Object product;
     public int amount;
+    public int id;
     public String name;
     public ProductNode next;
 
@@ -16,9 +17,13 @@ public class ProductNode {
         return name;
     }
 
+    public int getID(){
+        return id;
+    }
+
     // constructor
 
-    public ProductNode(int amount , String name){
+    public ProductNode(int id, int amount , String name){
 
         this.amount = amount;
         this.name = name;

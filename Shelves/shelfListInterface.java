@@ -14,10 +14,6 @@ public interface shelfListInterface {
 
     public Object findProductbyName(String name);
 
-   
-
     public void removeAll();
-
-
 
 }

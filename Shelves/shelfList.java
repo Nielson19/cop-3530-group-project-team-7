@@ -33,69 +33,71 @@ public class shelfList implements shelfListInterface{
                     // condition if only one element is in list
                     if (tail == null){
                         tail = newProduct; // tail also becomes the newProduct since it taking place of both
+                    } else { // if it does exist
+
+                        ProductNode foundProduct = (ProductNode)findProductbyName(name);
+                        foundProduct.amount = foundProduct.amount + amount;
+
+                        System.out.println("The Product: " + foundProduct.getName() + " has now " + foundProduct.getAmount() + " Units" );
+
                     }
 
-                } else { // if it does exist
-
-                ProductNode foundProduct = (ProductNode)findProductbyName(name);
-                foundProduct.amount = foundProduct.amount + amount;
-            }
-
-               
-
-            }
-
-            // if index is at the end of the list
-
-            else if(location == size){ // - 1 ?
-
-                // condition if item exist
-
-                if(findProductbyName(name) == null){ // if do not exist
-
-                ProductNode newProduct = new ProductNode(id, amount, name);//create the product
-                tail.next = newProduct; // next of current tail carries NewNode
-                tail = newProduct; // newNode becomes the new Tail
-
-                    
-                } else { // if it does exist
-
-                    ProductNode foundProduct = (ProductNode)findProductbyName(name);
-                    foundProduct.amount = foundProduct.amount + amount;
                 }
-
             }
 
-            // if index is in the middle of the list
+                // if index is at the end of the list
 
-            else {
+                else if(location == size){ // - 1 ?
 
-                 // condition if item exist
+                    // condition if item exist
 
-                if(findProductbyName(name) == null){ // if do not exist
-
-                    int n = 0;
-                    ProductNode current = head; //starting 
-                    while (n < location - 1){ // iteration 
-                        current = current.next; 
-                        n++;
-                    }
+                    if(findProductbyName(name) == null){ // if do not exist
 
                     ProductNode newProduct = new ProductNode(id, amount, name);//create the product
-                    newProduct.next = current.next; 
-                    current.next = newProduct; // opening the space for the new product
+                    tail.next = newProduct; // next of current tail carries NewNode
+                    tail = newProduct; // newNode becomes the new Tail
 
-                 
-                } else { // if it does exist
+                        
+                    } else { // if it does exist
 
-                    ProductNode foundProduct = (ProductNode)findProductbyName(name);
-                    foundProduct.amount = foundProduct.amount + amount;
+                        ProductNode foundProduct = (ProductNode)findProductbyName(name);
+                        foundProduct.amount = foundProduct.amount + amount;
+                        System.out.println("The Product: " + foundProduct.getName() + " has now " + foundProduct.getAmount() + " Units" );
+                    }
+
+                } 
+
+                // if index is in the middle of the list
+
+                else {
+
+                    // condition if item exist
+
+                    if(findProductbyName(name) == null){ // if do not exist
+
+                        int n = 0;
+                        ProductNode current = head; //starting 
+                        while (n < location - 1){ // iteration 
+                            current = current.next; 
+                            n++;
+                        }
+
+                        ProductNode newProduct = new ProductNode(id, amount, name);//create the product
+                        newProduct.next = current.next; 
+                        current.next = newProduct; // opening the space for the new product
+
+                    
+                    } else { // if it does exist
+
+                        ProductNode foundProduct = (ProductNode)findProductbyName(name);
+                        foundProduct.amount = foundProduct.amount + amount;
+
+                        System.out.println("The Product: " + foundProduct.getName() + " has now " + foundProduct.getAmount() + " Units" );
+                    }
                 }
-            }
-            size++;
-        }
-
-        System.out.println("Product was not added because shelfist is empty");
+            
+                size++;
+        }   
     }
 
     public void removeProduct(int location, String name ,int amount){
@@ -161,7 +163,7 @@ public class shelfList implements shelfListInterface{
 
                     } else{ // if amount still available
 
-                        System.out.println("- " + current.name + " has now " + current.amount + "Units");
+                        System.out.println("- " + current.name + " has now " + current.amount + " Units");
                     }
                 
             } 
@@ -246,8 +248,7 @@ public class shelfList implements shelfListInterface{
         return null;
     
         }
-
-    
+   
     public Object findProductbyName(String name){
 
         ProductNode current = head;
