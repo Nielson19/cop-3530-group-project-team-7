@@ -33,16 +33,18 @@ public class shelfList implements shelfListInterface{
                     // condition if only one element is in list
                     if (tail == null){
                         tail = newProduct; // tail also becomes the newProduct since it taking place of both
-                    } else { // if it does exist
+                    } 
 
-                        ProductNode foundProduct = (ProductNode)findProductbyName(name);
-                        foundProduct.amount = foundProduct.amount + amount;
+                } else { // if it does exist
 
-                        System.out.println("The Product: " + foundProduct.getName() + " has now " + foundProduct.getAmount() + " Units" );
+                    ProductNode foundProduct = (ProductNode)findProductbyName(name);
+                    foundProduct.amount = foundProduct.amount + amount;
+
+                    System.out.println("The Product: " + foundProduct.getName() + " has now " + foundProduct.getAmount() + " Units" );
 
                     }
 
-                }
+                
             }
 
                 // if index is at the end of the list
@@ -100,7 +102,7 @@ public class shelfList implements shelfListInterface{
         }   
     }
 
-    public void removeProduct(int location, String name ,int amount){
+ public void removeProduct(int id, String name ,int amount){
 
 
         ProductNode current = (ProductNode)findProductbyName(name);
@@ -147,7 +149,7 @@ public class shelfList implements shelfListInterface{
 
                     if (current.amount <= 0) { // if amount runs out 
 
-                        if (location == size - 1) { //TODO optimize this code
+                        if (id == size - 1) { //TODO optimize this code
                              // Removing the last element of the list
                         ProductNode currentProduct = head;
                         for(int i = 0; i < size - 2; i++) 
@@ -237,7 +239,6 @@ public class shelfList implements shelfListInterface{
 
         while (current != null) {
             if (current.getID() == id) {
-                // System.out.println("Product " + current.name + " was found");
                 return current;
             }
 
@@ -266,7 +267,6 @@ public class shelfList implements shelfListInterface{
         return null;
     
         }
-
 
     public void removeAll() { // empty list
         size = 0;

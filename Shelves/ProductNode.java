@@ -24,7 +24,7 @@ public class ProductNode {
     // constructor
 
     public ProductNode(int id, int amount , String name){
-
+        this.id = id;
         this.amount = amount;
         this.name = name;
         next = null;
