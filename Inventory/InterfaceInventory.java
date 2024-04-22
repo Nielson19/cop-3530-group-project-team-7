@@ -10,7 +10,7 @@ public interface InterfaceInventory {
         
     void add(int productID, String productName, int amount); 
         
-    void remove(int productID, String productName, int amount);
+    void remove(int productID, int amount);
         
     Object findbyID(int productID);
     

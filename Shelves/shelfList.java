@@ -102,80 +102,83 @@ public class shelfList implements shelfListInterface{
         }   
     }
 
- public void removeProduct(int id, String name ,int amount){
+ public void removeProduct(int id,int amount){
 
 
-        ProductNode current = (ProductNode)findProductbyName(name);
+        ProductNode current = (ProductNode)findProductbyID(id);
 
-            // if index is at the beginning
+            // if index is not null
+            if (current != null){
 
-            if(current.getName() == head.getName()){
-                
-                // apply amount change
+                //if index is at the beginning
 
-                head.amount = head.amount - amount;
-                
-                // condition amount is 0 delete
-
-                if (head.amount <= 0) {
-
-                        head = head.next; // current head is replaced for head.next
-
-                    if (head == null){ // the replacement is null
-                        tail = null; 
-                    }
-                    size--;
-
-                } else{
-
-                    System.out.println("- " + head.name + " has now " + head.amount + " Units");
-                }
-       
-            }
-
-            // if index is at the end of the list
-
-            else if(current.getName() == tail.getName()){ 
-            
-                // create a variable with the result of a find
-
-                    //apply change of amount
-
-                    current.amount = current.amount - amount;
-
-                           // condition of amount is 0
-
-
-
-                    if (current.amount <= 0) { // if amount runs out 
-
-                        if (id == size - 1) { //TODO optimize this code
-                             // Removing the last element of the list
-                        ProductNode currentProduct = head;
-                        for(int i = 0; i < size - 2; i++) 
-                        {
-                            currentProduct = currentProduct.next;
-                        }
-                        tail = currentProduct;
-                        tail.next = null;
-                        size--;
-                    }
+                if(current.getID() == head.getID()){
                     
-                      
+                    // apply amount change
 
-                    } else{ // if amount still available
+                    head.amount = head.amount - amount;
+                    
+                    // condition amount is 0 delete
 
-                        System.out.println("- " + current.name + " has now " + current.amount + " Units");
+                    if (head.amount <= 0) {
+
+                            head = head.next; // current head is replaced for head.next
+
+                        if (head == null){ // the replacement is null
+                            tail = null; 
+                        }
+                        size--;
+
+                    } else{
+
+                        System.out.println("- " + head.name + " has now " + head.amount + " Units");
                     }
-                
-            } 
+        
+                }
 
-            // if index is in the middle of the list
-            
-            else {
+                // if index is at the end of the list
+
+                else if(current.getID() == tail.getID()){ 
+                
+                    // create a variable with the result of a find
+
+                        //apply change of amount
+
+                        current.amount = current.amount - amount;
+
+                            // condition of amount is 0
+
+
+
+                        if (current.amount <= 0) { // if amount runs out 
+
+                            if (id == size - 1) { //TODO optimize this code
+                                // Removing the last element of the list
+                            ProductNode currentProduct = head;
+                            for(int i = 0; i < size - 2; i++) 
+                            {
+                                currentProduct = currentProduct.next;
+                            }
+                            tail = currentProduct;
+                            tail.next = null;
+                            size--;
+                        }
+                        
+                        
+
+                        } else{ // if amount still available
+                            System.out.println("---------------------------------------------------");
+                            System.out.println("- " + current.name + " has now " + current.amount + " Units");
+                        }
+                    
+                } 
+
+                // if index is in the middle of the list
+                
+                else {
 
                 // iteration
-                ProductNode prev = (ProductNode)findProductbyName(name); // starting point
+                ProductNode prev = (ProductNode)findProductbyID(id); // starting point
 
                 if (prev != null){
 
@@ -197,12 +200,17 @@ public class shelfList implements shelfListInterface{
                     }
                 } else if (prev == null){
 
-                    System.out.println("Product: " + name + "not changed. Product found");
+                    System.out.println("Product: " + id + "not changed. Product found");
                 }
                 
 
             }
            
+            } else {
+                System.out.println("---------------------------------------------------");
+                System.out.println("- The product: " + id + " was not found" );
+            }
+               
         }
              
     public String stringReport(){ //TODO the first line of the report is not using the \t on the string 
@@ -233,7 +241,6 @@ public class shelfList implements shelfListInterface{
     }
 
     public Object findProductbyID(int id){
-
 
         ProductNode current = head;
 

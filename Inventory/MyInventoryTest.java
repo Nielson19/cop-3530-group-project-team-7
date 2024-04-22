@@ -14,7 +14,7 @@ public class MyInventoryTest {
         inventory.add(400, "Cake", 8);
 
         inventory.add(101, "Beans", 20);
-        // inventory.add(102, "Bread", 20);
+        inventory.add(201, "Bread", 20);
         inventory.add(301, "Pasta", 50); // Adding more of an existing product
         inventory.add(401, "Cake", 20);
 
@@ -27,13 +27,14 @@ public class MyInventoryTest {
         System.out.println("Inventory size: " + inventory.size());
 
         // Remove products from the inventory
-        inventory.remove(102, "Pasta", 25);
-        inventory.remove(101, "Beans", 2);
+        inventory.remove(102, 25);
+        inventory.remove(101, 2);
 
         inventory.findbyID(100);
 
         // Generate and print the inventory report
-        // inventory.getReport();
- 
+        inventory.getReport();
+        
+        System.out.println("---------------------------------------------------");
     }
 }

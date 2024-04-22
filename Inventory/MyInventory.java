@@ -67,7 +67,7 @@ public class MyInventory implements InterfaceInventory
      * @param amount The quantity of the product to be removed.
      * @return The removed product, or null if the aisle doesn't exist.
      */
-    public void remove(int productID, String productName, int amount) 
+    public void remove(int productID, int amount) 
     {
          // Calculate index based on the aisleNumber
         int index = Math.abs(productID) % size;
@@ -82,7 +82,7 @@ public class MyInventory implements InterfaceInventory
         shelfList list = table[index];
 
         // Remove the specified amount of the product from the shelfList
-        list.removeProduct(productID, productName, amount);
+        list.removeProduct(productID, amount);
 
     }
     
@@ -107,12 +107,11 @@ public class MyInventory implements InterfaceInventory
             ProductNode product = (ProductNode) list.findProductbyID(productID);
              
               if (product.getName() != null) 
-                {
-                    System.out.println( "----Product found----" +
+                {   
+                    System.out.println("---------------------------------------------------\n***PRODUCT FOUND***" +
                     "\n|Product: " + product.getName() + 
                     "\n|Aisle: " + index + 
                     "\n|Amount: " + product.getAmount()+ " Units");
-                    System.out.println("---------------------");
 
                     return product; // Return the found product
                 }
@@ -148,6 +147,7 @@ public class MyInventory implements InterfaceInventory
                 System.out.println("Aisle "+ count);
                 System.out.println(aisle.stringReport());
             } else{
+                System.out.println("---------------------------------------------------");
                 System.out.println("Aisle "+ count +" is empty");
             }
             
