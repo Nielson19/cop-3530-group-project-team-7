@@ -24,10 +24,10 @@ public class shelfListTest {
         System.out.println(myShelf.stringReport()); // Print the report to see if the product is added correctly
         System.out.println("---------------------------------------------------");
 
-        myShelf.removeProduct(0, "Apple", 20);
-        myShelf.removeProduct(1, "Juice", 10);
-        myShelf.removeProduct(2, "Bread", 10);
-        myShelf.removeProduct(3, "Cheese", 10);
+        myShelf.removeProduct(0, 20);
+        myShelf.removeProduct(1, 10);
+        myShelf.removeProduct(2, 10);
+        myShelf.removeProduct(3, 10);
        
         // System.out.println(myShelf.stringReport()); // Print the report to see if the product deleted correctly
         System.out.println("---------------------------------------------------");

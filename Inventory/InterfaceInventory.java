@@ -14,7 +14,6 @@ public interface InterfaceInventory {
         
     Object findbyID(int productID);
     
-     //TODO make a findbyName method
-      void getReport();
+    void getReport();
 
 }

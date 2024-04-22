@@ -1,5 +1,4 @@
 package Inventory;
-
 import Shelves.ProductNode;
 import Shelves.shelfList;
 
@@ -136,7 +135,6 @@ public class MyInventory implements InterfaceInventory
      * Generates a report of all products in the inventory.
      * @return An array of strings representing the report.
      */
-    
     
     public void getReport(){
         int count = 0;
