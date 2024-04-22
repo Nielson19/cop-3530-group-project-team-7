@@ -30,16 +30,16 @@ public class shelfListTest {
         myShelf.removeProduct(3, "Cheese", 10);
        
         // System.out.println(myShelf.stringReport()); // Print the report to see if the product deleted correctly
-        // System.out.println("---------------------------------------------------");
+        System.out.println("---------------------------------------------------");
 
-        // myShelf.addProduct(0, 100,"Apple",100); // location, id, name, amount
-        // myShelf.addProduct(1, 101,"Juice",100);
-        // myShelf.addProduct(2, 102,"Bread",100); // this should add the existing value
-        // myShelf.addProduct(3, 103, "Cheese",100); // TODO: OPTIONAL: Delete the product when it reaches amount 0 
+        myShelf.addProduct(0, 100,"Apple",100); // location, id, name, amount
+        myShelf.addProduct(1, 101,"Juice",100);
+        myShelf.addProduct(2, 102,"Bread",100); // this should add the existing value
+        myShelf.addProduct(3, 103, "Cheese",100); // TODO: OPTIONAL: Delete the product when it reaches amount 0 
 
 
-        // System.out.println(myShelf.stringReport()); // Print the report to see if the list is fully deleted
-        // System.out.println("---------------------------------------------------");
+        System.out.println(myShelf.stringReport()); // Print the report to see if the list is fully deleted
+        System.out.println("---------------------------------------------------");
 
         System.out.println(myShelf.isEmpty()); // false 
 
